@@ -8,42 +8,24 @@ and dig into the [archway docs](https://docs.archway.io).
 
 The below instructions assume you understand the theory and just want to get coding.
 
-## Creating a new repo from template
+## Creating a new project from a template
 
 Assuming you have a recent version of rust and cargo (v1.51.0+) installed
 (via [rustup](https://rustup.rs/)),
 then the following should get you a new repo to start a contract:
 
-
 Install [cargo-generate](https://github.com/ashleygwilliams/cargo-generate) and cargo-run-script.
 Unless you did that before, run this line now:
 
 ```sh
-cargo install cargo-generate cargo-run-script --features vendored-openssl 
+cargo install cargo-generate cargo-run-script --features vendored-openssl
 ```
 
 Now, use it to create your new contract.
 Go to the folder in which you want to place it and run:
 
-
-**Latest: 0.16**
-
 ```sh
-cargo generate --git git@github.com:drewstaylor/archway-template.git --name PROJECT_NAME
-````
-
-**Older Version**
-
-Pass version as branch flag:
-
-```sh
-cargo generate --git git@github.com:drewstaylor/archway-template.git --branch <version> --name PROJECT_NAME
-````
-
-Example:
-
-```sh
-cargo generate --git git@github.com:drewstaylor/archway-template.git --branch 0.14 --name PROJECT_NAME
+cargo generate --git archway-network/archway-templates.git --name PROJECT_NAME default
 ```
 
 You will now have a new folder called `PROJECT_NAME` (I hope you changed that to something else)
@@ -62,7 +44,7 @@ git branch -M main
 git add .
 git commit -m 'Initial Commit'
 git remote add origin YOUR-GIT-URL
-git push -u origin master
+git push -u origin main
 ```
 
 ## CI Support
@@ -99,9 +81,9 @@ proper description in the README.
 [Gitpod](https://www.gitpod.io/) container-based development platform will be enabled on your project by default.
 
 Workspace contains:
- - **rust**: for builds
- - [wasmd](https://github.com/CosmWasm/wasmd): for local node setup and client
- - **jq**: shell JSON manipulation tool
+
+- **rust**: for builds
+- [wasmd](https://github.com/CosmWasm/wasmd): for local node setup and client
+- **jq**: shell JSON manipulation tool
 
 Follow [Gitpod Getting Started](https://www.gitpod.io/docs/getting-started) and launch your workspace.
-
