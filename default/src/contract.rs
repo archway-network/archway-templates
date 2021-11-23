@@ -39,7 +39,7 @@ pub fn execute(
     msg: ExecuteMsg,
 ) -> Result<Response, ContractError> {
     match msg {
-        _ => try_execute(deps),
+        ExecuteMsg::Dummy {} => try_execute(deps),
     }
 }
 
@@ -49,14 +49,16 @@ pub fn try_execute(_deps: DepsMut) -> Result<Response, ContractError> {
 }
 
 #[cfg_attr(not(feature = "library"), entry_point)]
-pub fn query(deps: Deps, _env: Env, msg: QueryMsg) -> StdResult<Binary> {
+pub fn query(_deps: Deps, _env: Env, msg: QueryMsg) -> StdResult<Binary> {
     match msg {
-        _ => to_binary(&hello_world(deps)?),
+        QueryMsg::Hello {} => to_binary(&hello_world()?),
     }
 }
 
-fn hello_world(_deps: Deps) -> StdResult<String> {
-    Ok(String::from("Hello, Archway!"))
+fn hello_world() -> StdResult<HelloResponse> {
+    Ok(HelloResponse {
+        msg: String::from("Hello, Archway!"),
+    })
 }
 
 #[cfg(test)]
@@ -107,8 +109,8 @@ mod tests {
         instantiate_contract(deps.as_mut());
 
         let res = query(deps.as_ref(), mock_env(), QueryMsg::Hello {}).unwrap();
-        let value: String = from_binary(&res).unwrap();
-        assert_eq!("Hello, Archway!", value);
+        let value: HelloResponse = from_binary(&res).unwrap();
+        assert_eq!("Hello, Archway!", value.msg);
     }
 
     fn instantiate_contract(deps: DepsMut) -> Response {
