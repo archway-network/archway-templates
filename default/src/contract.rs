@@ -64,12 +64,14 @@ fn hello_world() -> StdResult<HelloResponse> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use cosmwasm_std::testing::{mock_dependencies, mock_env, mock_info};
+    use cosmwasm_std::testing::{
+        mock_dependencies, mock_dependencies_with_balance, mock_env, mock_info,
+    };
     use cosmwasm_std::{coins, from_binary};
 
     #[test]
     fn can_instantiate() {
-        let mut deps = mock_dependencies(&[]);
+        let mut deps = mock_dependencies();
 
         let res = instantiate_contract(deps.as_mut());
         assert_eq!(0, res.messages.len());
@@ -85,7 +87,7 @@ mod tests {
 
     #[test]
     fn can_execute() {
-        let mut deps = mock_dependencies(&coins(2, "token"));
+        let mut deps = mock_dependencies_with_balance(&coins(2, "token"));
 
         instantiate_contract(deps.as_mut());
 
@@ -104,7 +106,7 @@ mod tests {
 
     #[test]
     fn can_query() {
-        let mut deps = mock_dependencies(&coins(2, "token"));
+        let mut deps = mock_dependencies_with_balance(&coins(2, "token"));
 
         instantiate_contract(deps.as_mut());
 
