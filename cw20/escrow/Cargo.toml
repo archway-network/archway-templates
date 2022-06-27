@@ -1,0 +1,33 @@
+[package]
+name = "{{project-name}}"
+version = "0.12.1"
+authors = [{{authors}}]
+edition = "2018"
+description = "Implementation of an escrow that accepts CosmWasm-20 tokens as well as native tokens"
+license = "Apache-2.0"
+repository = "https://github.com/CosmWasm/cw-tokens"
+homepage = "https://cosmwasm.com"
+documentation = "https://docs.cosmwasm.com"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+backtraces = ["cosmwasm-std/backtraces"]
+# use library feature to disable all instantiate/execute/query exports
+library = []
+
+[dependencies]
+cw-utils = "0.13.2"
+cw2 = "0.13.2"
+cw20 = "0.13.2"
+cosmwasm-std = "1.0.0-beta8"
+cw-storage-plus = "0.13.2"
+schemars = "0.8.8"
+serde = { version = "1.0.137", default-features = false, features = ["derive"] }
+thiserror = "1.0.31"
+
+[dev-dependencies]
+cosmwasm-schema = "1.0.0-beta8"
+cw-multi-test = "0.13.2"
+cw20-base = { version = "0.13.2", features = ["library"] }
