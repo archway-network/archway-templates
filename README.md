@@ -2,10 +2,13 @@
 
 Archway Smart Contract template projects used by the [Archway Developer CLI](https://github.com/archway-network/archway-cli).
 
-## List of templates
+## List of templatesa
 
 - [Default](./default): a blank slate project
-- [Increment](./increment): a simple smart contract that increments and resets a counter
+- [Increment](./increment): a simple smart contrct that increments and resets a counter
+- [CW20-base](./cw20/base): the base smart contract for the CW20 Fungible Tokens standard 
+- [CW20-escrow](./cw20/escrow): a smart contract representing an escrow for depositing and withdrawing CW20 tokens. 
+- [CW721-on-chain-metdata](./cw721/on-chain-metadata/): the CW721 standard smart contract with an extension to store NFT metadata on chain.
 
 ## Creating a new project from a template
 
