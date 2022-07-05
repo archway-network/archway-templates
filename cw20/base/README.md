@@ -1,20 +1,21 @@
-# CosmWasm Starter Pack
+# Archway Network Starter Pack
 
 This is a template to build smart contracts in Rust to run inside a
 [Cosmos SDK](https://github.com/cosmos/cosmos-sdk) module on all chains that enable it.
 To understand the framework better, please read the overview in the
-[cosmwasm repo](https://github.com/CosmWasm/cosmwasm/blob/master/README.md),
-and dig into the [cosmwasm docs](https://www.cosmwasm.com).
-This assumes you understand the theory and just want to get coding.
+[archway repo](https://github.com/archway-network/archway/blob/main/README.md),
+and dig into the [archway docs](https://docs.archway.io).
 
-## Creating a new repo from template
+The below instructions assume you understand the theory and just want to get coding.
 
-Assuming you have a recent version of rust and cargo (v1.58.1+) installed
+## Creating a new project from a template
+
+Assuming you have a recent version of rust and cargo (v1.51.0+) installed
 (via [rustup](https://rustup.rs/)),
 then the following should get you a new repo to start a contract:
 
 Install [cargo-generate](https://github.com/ashleygwilliams/cargo-generate) and cargo-run-script.
-Unless you did that before, run this line now:
+If you didn't install them already, run the following commands:
 
 ```sh
 cargo install cargo-generate --features vendored-openssl
@@ -24,25 +25,8 @@ cargo install cargo-run-script
 Now, use it to create your new contract.
 Go to the folder in which you want to place it and run:
 
-
-**Latest: 1.0.0-beta6**
-
 ```sh
-cargo generate --git https://github.com/CosmWasm/cw-template.git --name PROJECT_NAME
-````
-
-**Older Version**
-
-Pass version as branch flag:
-
-```sh
-cargo generate --git https://github.com/CosmWasm/cw-template.git --branch <version> --name PROJECT_NAME
-````
-
-Example:
-
-```sh
-cargo generate --git https://github.com/CosmWasm/cw-template.git --branch 0.16 --name PROJECT_NAME
+cargo generate --git archway-network/archway-templates.git --name PROJECT_NAME default
 ```
 
 You will now have a new folder called `PROJECT_NAME` (I hope you changed that to something else)
@@ -81,7 +65,7 @@ running `cargo check` or `cargo unit-test`.
 
 Once you have your custom repo, you should check out [Developing](./Developing.md) to explain
 more on how to run tests and develop code. Or go through the
-[online tutorial](https://docs.cosmwasm.com/) to get a better feel
+[online tutorial](https://docs.archway.io/docs/create/guides/my-first-dapp/start) to get a better feel
 of how to develop.
 
 [Publishing](./Publishing.md) contains useful information on how to publish your contract
@@ -98,9 +82,9 @@ proper description in the README.
 [Gitpod](https://www.gitpod.io/) container-based development platform will be enabled on your project by default.
 
 Workspace contains:
- - **rust**: for builds
- - [wasmd](https://github.com/CosmWasm/wasmd): for local node setup and client
- - **jq**: shell JSON manipulation tool
+
+- **rust**: for builds
+- [wasmd](https://github.com/CosmWasm/wasmd): for local node setup and client
+- **jq**: shell JSON manipulation tool
 
 Follow [Gitpod Getting Started](https://www.gitpod.io/docs/getting-started) and launch your workspace.
-
