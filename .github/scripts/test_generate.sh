@@ -15,7 +15,7 @@ function test-template() {
   echo "# Testing template $TEMPLATE"
   echo "#######################################"
   (
-    GIT_BRANCH=$(git -C "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" branch --show-current)
+    GIT_BRANCH=$(git -C "$REPO_ROOT" branch --show-current)
 
     echo "Generating project from local repository (branch $GIT_BRANCH) ..."
     cargo generate --git "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" --name "$PROJECT_NAME" --branch "$GIT_BRANCH" "$TEMPLATE"
