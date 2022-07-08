@@ -43,7 +43,7 @@ function test-template() {
   )
 }
 
-find "$REPO_ROOT" -name Cargo.toml -exec dirname {} \; | while read -r TEMPLATE; do
-  test-template "${TEMPLATE//$REPO_ROOT\//}"
+find "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" -name Cargo.toml -exec dirname {} \; | while read -r TEMPLATE; do
+  test-template "${TEMPLATE//$GITHUB_SERVER_URL/$GITHUB_REPOSITORY\//}"
   echo
 done
