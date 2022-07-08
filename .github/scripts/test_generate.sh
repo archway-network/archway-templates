@@ -2,6 +2,7 @@
 set -u -o errexit -o nounset -o pipefail
 command -v shellcheck > /dev/null && shellcheck "$0"
 
+REPO_ROOT="$(realpath "$(dirname "$0")/../..")"
 TMP_DIR=$(mktemp -d "${TMPDIR:-/tmp}/XXXXXXXXX")
 
 echo "Navigating to $TMP_DIR"
@@ -43,7 +44,7 @@ function test-template() {
   )
 }
 
-find "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" -name Cargo.toml -exec dirname {} \; | while read -r TEMPLATE; do
-  test-template "${TEMPLATE//$GITHUB_SERVER_URL/$GITHUB_REPOSITORY\//}"
+find "$REPO_ROOT" -name Cargo.toml -exec dirname {} \; | while read -r TEMPLATE; do
+  test-template "${TEMPLATE//$REPO_ROOT\//}"
   echo
 done
