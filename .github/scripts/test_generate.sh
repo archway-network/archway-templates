@@ -14,6 +14,7 @@ function test-template() {
   echo "#######################################"
   echo "# Testing template $TEMPLATE"
   echo "#######################################"
+  echo "$REPO_ROOT"
   (
     GIT_BRANCH=$(git -C "$REPO_ROOT" branch --show-current)
 
