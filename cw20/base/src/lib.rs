@@ -54,8 +54,7 @@ mod tests {
 
     use cosmwasm_std::{
         testing::{mock_dependencies, mock_env, mock_info},
-        Deps,
-        Uint128
+        Deps, Uint128
     };
     use cw20::{Cw20Coin, TokenInfoResponse};
     use cw20_base::contract::{query_balance, query_token_info};
