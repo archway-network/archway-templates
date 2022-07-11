@@ -25,7 +25,5 @@ jobs:
 
       - name: Test all templates
         run: ${{ github.workspace }}/.github/scripts/test_generate.sh
-      - name: Setup tmate session
-        if: ${{ failure() }}
-        uses: mxschmitt/action-tmate@v3
+
 
