@@ -1,6 +1,7 @@
 use cw2::set_contract_version;
 
-pub use cw20_base::contract::{execute as executeCw20, instantiate as instantiateCw20, query as queryCw20,
+pub use cw20_base::contract::{
+    execute as executeCw20, instantiate as instantiateCw20, query as queryCw20,
 };
 pub use cw20_base::msg::{ExecuteMsg, InstantiateMsg, QueryMsg};
 const CONTRACT_NAME: &str = "crates.io:{{project-name}}";
@@ -52,9 +53,9 @@ mod tests {
     use super::*;
 
     use cosmwasm_std::{
-                testing::{mock_dependencies, mock_env, mock_info},
-               Deps,
-            };
+        testing::{mock_dependencies, mock_env, mock_info},
+        Deps,
+    };
     use cw20::{Cw20Coin, TokenInfoResponse};
     use cw20_base::contract::{query_balance, query_token_info};
     const CREATOR: &str = "creator";
