@@ -35,8 +35,6 @@ function test-template() {
       # Debug builds first to fail fast
       echo "Running unit tests ..."
       cargo unit-test
-      echo "Creating schema ..."
-      cargo schema
 
       echo "Building wasm ..."
       cargo wasm
