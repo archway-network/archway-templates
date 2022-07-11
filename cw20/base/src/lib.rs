@@ -1,15 +1,8 @@
-
-
 use cw2::set_contract_version;
 
-pub use cw20_base::msg::{ExecuteMsg,InstantiateMsg,QueryMsg};
-pub use cw20_base::contract::{instantiate as instantiateCw20, execute as executeCw20, query as queryCw20};
-
-
-
-
-
-
+pub use cw20_base::contract::{execute as executeCw20, instantiate as instantiateCw20, query as queryCw20,
+};
+pub use cw20_base::msg::{ExecuteMsg, InstantiateMsg, QueryMsg};
 const CONTRACT_NAME: &str = "crates.io:{{project-name}}";
 const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 
@@ -58,10 +51,12 @@ mod tests {
 
     use super::*;
 
-    use cosmwasm_std::{testing::{mock_dependencies, mock_env, mock_info}, Deps};
+    use cosmwasm_std::{
+                testing::{mock_dependencies, mock_env, mock_info},
+               Deps,
+            };
     use cw20::{Cw20Coin, TokenInfoResponse};
-    use cosmwasm_std::Uint128;
-    use cw20_base::contract::{query_token_info, query_balance};
+    use cw20_base::contract::{query_balance, query_token_info};
     const CREATOR: &str = "creator";
 
     fn get_balance<T: Into<String>>(deps: Deps, address: T) -> Uint128 {
@@ -102,4 +97,3 @@ mod tests {
         );
     }
 }
-
