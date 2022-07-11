@@ -16,7 +16,8 @@ function test-template() {
   echo "#######################################"
   (
     GIT_BRANCH=$(git -C "$REPO_ROOT" branch --show-current)
-
+    echo "Updating rust and cargo ..."
+    rustup update
     echo "Generating project from local repository (branch $GIT_BRANCH) ..."
     cargo generate --git "$REPO_ROOT" --name "$PROJECT_NAME" --branch "$GIT_BRANCH" "$TEMPLATE"
 
