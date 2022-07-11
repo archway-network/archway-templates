@@ -53,7 +53,7 @@ mod tests {
     use super::*;
 
     use cosmwasm_std::{
-        testing::{mock_dependencies, mock_env, mock_info},
+        testing::{mock_dependencies, mock_env, mock_info, Uint128},
         Deps,
     };
     use cw20::{Cw20Coin, TokenInfoResponse};
