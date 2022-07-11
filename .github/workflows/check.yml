@@ -25,5 +25,3 @@ jobs:
 
       - name: Test all templates
         run: ${{ github.workspace }}/.github/scripts/test_generate.sh
-
-
