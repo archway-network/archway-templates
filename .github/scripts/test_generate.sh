@@ -10,7 +10,7 @@ cd "$TMP_DIR"
 
 function test-template() {
   TEMPLATE="${1}"
-  PROJECT_NAME="cw-test"
+  PROJECT_NAME="$RANDOM"
   echo "#######################################"
   echo "# Testing template $TEMPLATE"
   echo "#######################################"
