@@ -18,7 +18,7 @@ function test-template() {
 
   (
     echo "Generating project from local repository..."
-    cargo generate --git "$REPO_ROOT" --name "$PROJECT_NAME" "$TEMPLATE"
+    cargo generate --path "$REPO_ROOT" --name "$PROJECT_NAME" "$TEMPLATE"
 
     (
       cd "$PROJECT_NAME"
