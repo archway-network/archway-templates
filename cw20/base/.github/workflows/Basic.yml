@@ -37,6 +37,18 @@ jobs:
         env:
           RUSTFLAGS: "-C link-arg=-s"
 
+      - name: Verify schema
+        uses: tj-actions/verify-changed-files@v8
+        id: verify-schema
+        with:
+          files: schema/.*\.json
+
+      - name: Display changed schemas
+        if: steps.verify-schema.outputs.files_changed == 'true'
+        run: |
+          echo "The schema files are not in sync with the repository. Please, run 'cargo schema' to generate them again and commit the changes."
+          exit 1
+
   lints:
     name: Lints
     runs-on: ubuntu-latest
