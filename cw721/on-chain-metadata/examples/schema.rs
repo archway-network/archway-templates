@@ -8,7 +8,7 @@ use cw721::{
     NumTokensResponse, OperatorsResponse, OwnerOfResponse, TokensResponse,
 };
 use {{crate_name}}::{
-    ExecuteMsg, Extension, InstantiateMsg, MinterResponse, QueryMsg
+    ExecuteMsg, Extension, InstantiateMsg, MinterResponse, QueryMsg,
 };
 
 fn main() {
