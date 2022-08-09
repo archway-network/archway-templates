@@ -10,15 +10,15 @@ cd "$TMP_DIR"
 
 function test-template() {
   TEMPLATE="${1}"
-  PROJECT_NAME="test-$RANDOM"
+  PROJECT_NAME="${TEMPLATE//\//-}-$RANDOM"
+
   echo "#######################################"
   echo "# Testing template $TEMPLATE"
   echo "#######################################"
-  (
-    GIT_BRANCH=$(git -C "$REPO_ROOT" branch --show-current)
 
-    echo "Generating project from local repository (branch $GIT_BRANCH) ..."
-    cargo generate --git "$REPO_ROOT" --name "$PROJECT_NAME" --branch "$GIT_BRANCH" "$TEMPLATE"
+  (
+    echo "Generating project from local repository..."
+    cargo generate --path "$REPO_ROOT" --name "$PROJECT_NAME" "$TEMPLATE"
 
     (
       cd "$PROJECT_NAME"
