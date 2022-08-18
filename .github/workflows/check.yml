@@ -16,6 +16,8 @@ jobs:
           target: wasm32-unknown-unknown
           override: true
           profile: minimal
+          components: clippy
+        
 
       - name: Install cargo-generate
         uses: actions-rs/cargo@v1
