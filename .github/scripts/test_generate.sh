@@ -30,11 +30,12 @@ function test-template() {
       cargo fmt -- --check
 
       echo "Running clippy ..."
-      cargo clippy -- -D warnings
+      cargo clippy -- -D warnings -A clippy::derive_partial_eq_without_eq
 
       # Debug builds first to fail fast
       echo "Running unit tests ..."
       cargo unit-test
+
       echo "Creating schema ..."
       cargo schema
 
@@ -44,7 +45,11 @@ function test-template() {
   )
 }
 
-find "$REPO_ROOT" -name Cargo.toml -exec dirname {} \; | while read -r TEMPLATE; do
-  test-template "${TEMPLATE//$REPO_ROOT\//}"
-  echo
-done
+if [[ -n "${1:-}" ]]; then
+  test-template "${1}"
+else
+  find "$REPO_ROOT" -name Cargo.toml -exec dirname {} \; | while read -r TEMPLATE; do
+    test-template "${TEMPLATE//$REPO_ROOT\//}"
+    echo
+  done
+fi
