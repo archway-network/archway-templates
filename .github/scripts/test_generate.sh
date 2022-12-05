@@ -45,8 +45,8 @@ function test-template() {
   )
 }
 
-if [[ -n "${1}" ]]; then
-  test-template "$1"
+if [[ -n "${1:-}" ]]; then
+  test-template "${1}"
 else
   find "$REPO_ROOT" -name Cargo.toml -exec dirname {} \; | while read -r TEMPLATE; do
     test-template "${TEMPLATE//$REPO_ROOT\//}"
