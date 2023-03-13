@@ -26,7 +26,7 @@ Now, use it to create your new contract.
 Go to the folder in which you want to place it and run:
 
 ```sh
-cargo generate --git archway-network/archway-templates.git --name PROJECT_NAME default
+cargo generate --git https://github.com/archway-network/archway-templates.git --name PROJECT_NAME default
 ```
 
 You will now have a new folder called `PROJECT_NAME` (I hope you changed that to something else)
@@ -50,9 +50,8 @@ git push -u origin main
 
 ## CI Support
 
-We have template configurations for both [GitHub Actions](.github/workflows/Basic.yml)
-and [Circle CI](.circleci/config.yml) in the generated project, so you can
-get up and running with CI right away.
+We have template configurations for [GitHub Actions](.github/workflows/Basic.yml) in the generated project,
+so you can get up and running with CI right away.
 
 One note is that the CI runs all `cargo` commands
 with `--locked` to ensure it uses the exact same versions as you have locally. This also means
@@ -76,15 +75,3 @@ that have been published.
 Please replace this README file with information about your specific project. You can keep
 the `Developing.md` and `Publishing.md` files as useful referenced, but please set some
 proper description in the README.
-
-## Gitpod integration
-
-[Gitpod](https://www.gitpod.io/) container-based development platform will be enabled on your project by default.
-
-Workspace contains:
-
-- **rust**: for builds
-- [wasmd](https://github.com/CosmWasm/wasmd): for local node setup and client
-- **jq**: shell JSON manipulation tool
-
-Follow [Gitpod Getting Started](https://www.gitpod.io/docs/getting-started) and launch your workspace.
