@@ -1,27 +1,27 @@
-use schemars::JsonSchema;
-use serde::{Deserialize, Serialize};
+use cosmwasm_schema::{cw_serde, QueryResponses};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-pub struct InstantiateMsg {
+#[cw_serde]
+pub struct InstantiateMsg {% raw %}{{% endraw %}{% unless minimal %}
     pub count: i32,
-}
+{% endunless %}}
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-#[serde(rename_all = "snake_case")]
-pub enum ExecuteMsg {
+#[cw_serde]
+pub enum ExecuteMsg {% raw %}{{% endraw %}{% unless minimal %}
     Increment {},
     Reset { count: i32 },
-}
+{% endunless %}}
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-#[serde(rename_all = "snake_case")]
-pub enum QueryMsg {
+#[cw_serde]
+#[derive(QueryResponses)]
+pub enum QueryMsg {% raw %}{{% endraw %}{% unless minimal %}
     // GetCount returns the current count as a json-encoded number
+    #[returns(GetCountResponse)]
     GetCount {},
-}
-
+{% endunless %}}
+{% unless minimal %}
 // We define a custom struct for each query response
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-pub struct CountResponse {
+#[cw_serde]
+pub struct GetCountResponse {
     pub count: i32,
 }
+{% endunless %}
