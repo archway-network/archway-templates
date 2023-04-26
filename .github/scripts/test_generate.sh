@@ -29,7 +29,11 @@ function test-template() {
 
       # Check formatting
       echo "Checking formatting ..."
-      cargo fmt -- --check
+      if [ $TEMPLATE = "base-workspace" ]; then
+        echo "Skipping formatting check because the base-workspace template doesn't have any packages"
+      else
+        cargo fmt -- --check
+      fi
 
       echo "Running clippy ..."
       cargo clippy -- -D warnings -A clippy::derive_partial_eq_without_eq
