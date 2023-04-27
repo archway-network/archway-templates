@@ -29,7 +29,7 @@ function test-template() {
 
       # Check formatting
       echo "Checking formatting ..."
-      if [ $TEMPLATE = "base-workspace" ]; then
+      if [ "$TEMPLATE" = "base-workspace" ]; then
         echo "Skipping formatting check because the base-workspace template doesn't have any packages"
       else
         cargo fmt -- --check
