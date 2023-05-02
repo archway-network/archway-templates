@@ -1,5 +1,5 @@
-use std::env::current_dir;
 use std::fs::create_dir_all;
+use std::path::PathBuf;
 
 use cosmwasm_schema::{export_schema, remove_schemas, schema_for};
 
@@ -8,7 +8,7 @@ use cw20_escrow::msg::{
 };
 
 fn main() {
-    let mut out_dir = current_dir().unwrap();
+    let mut out_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
     out_dir.push("schema");
     create_dir_all(&out_dir).unwrap();
     remove_schemas(&out_dir).unwrap();
