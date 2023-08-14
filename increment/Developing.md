@@ -78,7 +78,7 @@ docker run --rm \
   -v "$(basename "$(pwd)")_registry_cache":/usr/local/cargo/registry \
   -v "$(basename "$(pwd)")_cosmwasm_sccache":/root/.cache/sccache \
   --name "$(basename "$(pwd)")" \
-  cosmwasm/rust-optimizer:0.12.12
+  cosmwasm/rust-optimizer:0.14.0
 ```
 
 Or, If you're on an arm64 machine, you should use a docker image built with arm64.
@@ -91,7 +91,7 @@ docker run --rm \
   -v "$(basename "$(pwd)")_registry_cache":/usr/local/cargo/registry \
   -v "$(basename "$(pwd)")_cosmwasm_sccache":/root/.cache/sccache \
   --name "$(basename "$(pwd)")" \
-  cosmwasm/rust-optimizer-arm64:0.12.12
+  cosmwasm/rust-optimizer-arm64:0.14.0
 ```
 
 We must mount the contract code to `/code`. You can use a absolute path instead

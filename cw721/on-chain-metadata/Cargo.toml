@@ -2,7 +2,7 @@
 name = "{{project-name}}"
 version = "0.1.0"
 authors = ["{{authors}}"]
-edition = "2018"
+edition = "2021"
 
 exclude = [
   # Those files are rust-optimizer artifacts. You might want to commit them for convenience but they should not be part of the source code publication.
@@ -15,15 +15,15 @@ exclude = [
 crate-type = ["cdylib", "rlib"]
 
 [profile.release]
-opt-level = 3
-debug = false
-rpath = false
-lto = true
-debug-assertions = false
 codegen-units = 1
-panic = 'abort'
+debug = false
+debug-assertions = false
 incremental = false
+lto = true
+opt-level = 3
 overflow-checks = true
+panic = 'abort'
+rpath = false
 
 [features]
 # for more explicit tests, cargo test --features=backtraces
@@ -32,21 +32,22 @@ backtraces = ["cosmwasm-std/backtraces"]
 library = []
 
 [package.metadata.scripts]
-optimize = """docker run --rm -v "$(pwd)":/code \
+optimize = """docker run --rm \
   -e CARGO_TERM_COLOR=always \
-  --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
-  --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  cosmwasm/rust-optimizer:0.12.5
+  -v "$(pwd)":/code \
+  -v "$(basename "$(pwd)")_cache":/code/target \
+  -v "$(basename "$(pwd)")_registry_cache":/usr/local/cargo/registry \
+  -v "$(basename "$(pwd)")_cosmwasm_sccache":/root/.cache/sccache \
+  --name "$(basename "$(pwd)")" \
+  cosmwasm/rust-optimizer:0.14.0
 """
 
 [dependencies]
-cosmwasm-std = "~1.0.0-beta"
-cw2 = "0.11"
-cw721 = "0.11"
-cw721-base = { version = "0.11", features = ["library"] }
-schemars = "0.8"
-serde = { version = "1.0", default-features = false, features = ["derive"] }
-thiserror = "1.0"
-
-[dev-dependencies]
-cosmwasm-schema = "~1.0.0-beta"
+cosmwasm-schema = "1.3.1"
+cosmwasm-std = "1.3.1"
+cw2 = "1.1.0"
+cw721 = "0.18.0"
+cw721-base = { version = "0.18,0", features = ["library"] }
+schemars = "0.8.12"
+serde = { version = "1.0.183", default-features = false, features = ["derive"] }
+thiserror = "1.0.44"
