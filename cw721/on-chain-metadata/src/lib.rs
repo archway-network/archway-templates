@@ -105,9 +105,6 @@ mod tests {
             .unwrap();
 
         let token_id = "Enterprise";
-        // TODO figure out how to correctly replace the missing mint
-        // Currently getting error in the next two expressins that says:
-        //  "expected value, found struct variant `ExecuteMsg::Mint` not a value"
         let mint_msg = ExecuteMsg::Mint{
             token_id: token_id.to_string(),
             owner: "john".to_string(),
@@ -118,13 +115,20 @@ mod tests {
                 ..Metadata::default()
             }),
         };
-        let exec_msg = ExecuteMsg::Mint(mint_msg.clone());
         contract
-            .execute(deps.as_mut(), mock_env(), info, exec_msg)
+            .execute(deps.as_mut(), mock_env(), info, mint_msg.clone())
             .unwrap();
 
         let res = contract.nft_info(deps.as_ref(), token_id.into()).unwrap();
-        assert_eq!(res.token_uri, mint_msg.token_uri);
-        assert_eq!(res.extension, mint_msg.extension);
+        if let ExecuteMsg::Mint {
+            token_id: _,
+            owner: _,
+            token_uri,
+            extension,
+        } = mint_msg
+        {
+            assert_eq!(res.token_uri, token_uri);
+            assert_eq!(res.extension, extension);
+        }
     }
 }

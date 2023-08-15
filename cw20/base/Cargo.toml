@@ -1,8 +1,8 @@
 [package]
 name = "{{project-name}}"
-version = "0.1.0"
+version = "0.0.1"
 authors = ["{{authors}}"]
-edition = "2018"
+edition = "2021"
 
 exclude = [
   # Those files are rust-optimizer artifacts. You might want to commit them for convenience but they should not be part of the source code publication.
