@@ -27,22 +27,26 @@ function test-template() {
       echo "This is what was generated"
       ls -lA
 
-      # Check formatting
-      echo "Checking formatting ..."
-      cargo fmt -- --check
+      if [ "$TEMPLATE" = "base-workspace" ]; then
+        echo "Skipping checks because the base-workspace template is an empty workspace without any packages"
+      else
+        # Check formatting
+        echo "Checking formatting ..."
+        cargo fmt -- --check
 
-      echo "Running clippy ..."
-      cargo clippy -- -D warnings -A clippy::derive_partial_eq_without_eq
+        echo "Running clippy ..."
+        cargo clippy -- -D warnings -A clippy::derive_partial_eq_without_eq
 
-      # Debug builds first to fail fast
-      echo "Running unit tests ..."
-      cargo unit-test
+        # Debug builds first to fail fast
+        echo "Running unit tests ..."
+        cargo unit-test
 
-      echo "Creating schema ..."
-      cargo schema
+        echo "Creating schema ..."
+        cargo schema
 
-      echo "Building wasm ..."
-      cargo wasm
+        echo "Building wasm ..."
+        cargo wasm
+      fi
     )
   )
 }
