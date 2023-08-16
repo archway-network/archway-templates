@@ -75,8 +75,8 @@ fn escrow_happy_path_cw20_tokens() {
     let cash = Cw20Contract(cash_addr.clone());
 
     // ensure our balances
-    let querier= QuerierWrapper::<Empty>::new(&router);
-    let owner_balance = cash.balance::< _, Empty>(&querier, owner.clone()).unwrap();
+    let querier = QuerierWrapper::<Empty>::new(&router);
+    let owner_balance = cash.balance::<_, Empty>(&querier, owner.clone()).unwrap();
     assert_eq!(owner_balance, Uint128::new(5000));
     let escrow_balance = cash
         .balance::<_, Empty>(&querier, escrow_addr.clone())
@@ -119,7 +119,7 @@ fn escrow_happy_path_cw20_tokens() {
     assert_eq!(2, escrow_attr.len());
 
     // ensure balances updated
-    let querier= QuerierWrapper::<Empty>::new(&router);
+    let querier = QuerierWrapper::<Empty>::new(&router);
     let owner_balance = cash.balance::<_, Empty>(&querier, owner.clone()).unwrap();
     assert_eq!(owner_balance, Uint128::new(3800));
     let escrow_balance = cash
@@ -150,7 +150,7 @@ fn escrow_happy_path_cw20_tokens() {
         .unwrap();
 
     // ensure balances updated - release to ben
-    let querier= QuerierWrapper::<Empty>::new(&router);    
+    let querier = QuerierWrapper::<Empty>::new(&router);
     let owner_balance = cash.balance::<_, Empty>(&querier, owner).unwrap();
     assert_eq!(owner_balance, Uint128::new(3800));
     let escrow_balance = cash.balance::<_, Empty>(&querier, escrow_addr).unwrap();

@@ -89,7 +89,7 @@ pub fn execute_create(
         },
         Balance::Cw20(token) => {
             // make sure the token sent is on the whitelist by default
-            if !cw20_whitelist.iter().any(|t| t == &token.address) {
+            if !cw20_whitelist.iter().any(|t| t == token.address) {
                 cw20_whitelist.push(token.address.clone())
             }
             GenericBalance {
@@ -161,7 +161,7 @@ pub fn execute_top_up(
 
     if let Balance::Cw20(token) = &balance {
         // ensure the token is on the whitelist
-        if !escrow.cw20_whitelist.iter().any(|t| t == &token.address) {
+        if !escrow.cw20_whitelist.iter().any(|t| t == token.address) {
             return Err(ContractError::NotInWhitelist {});
         }
     };
