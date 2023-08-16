@@ -6,7 +6,6 @@ fn main() {
     write_api! {
         instantiate: InstantiateMsg,
         execute: ExecuteMsg,
-        // TODO fix QueryMsg not matching expected
         query: QueryMsg,
     }
 }
