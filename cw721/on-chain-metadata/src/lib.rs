@@ -105,7 +105,7 @@ mod tests {
             .unwrap();
 
         let token_id = "Enterprise";
-        let mint_msg = ExecuteMsg::Mint{
+        let mint_msg = ExecuteMsg::Mint {
             token_id: token_id.to_string(),
             owner: "john".to_string(),
             token_uri: Some("https://starships.example.com/Starship/Enterprise.json".into()),
