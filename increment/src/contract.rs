@@ -4,7 +4,7 @@ use cosmwasm_std::{% raw %}{{% endraw %}{% unless version == "minimal" %}to_bina
 {% if version == "minimal" %}// {% endif %}use cw2::set_contract_version;
 
 use crate::error::ContractError;
-use crate::msg::{ExecuteMsg, {% unless minimal %}GetCountResponse, {% endunless %}InstantiateMsg, QueryMsg};
+use crate::msg::{ExecuteMsg, {% unless version == "minimal" %}GetCountResponse, {% endunless %}InstantiateMsg, QueryMsg};
 {% unless version == "minimal" %}use crate::state::{State, STATE};
 {% endunless %}
 {% if version == "minimal" %}/*
