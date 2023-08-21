@@ -4,15 +4,18 @@
 # The files will be copied 1:1 to the target project. To avoid shipping them completely add them to `.genignore`.
 exclude = [".circleci/config.yml"]
 
-[placeholders.minimal]
-type = "bool"
-prompt = """The full template includes some example logic in case you're new to CosmWasm smart contracts.
-The minimal template assumes you already know how to write your own logic, and doesn't get in your way.
+[placeholders.version]
+type = "string"
+choices = ["full", "minimal"]
+prompt = """This template has 2 versions:
 
-Would you like to generate the minimal template?"""
-default = false
+- The full template includes example logic in case you're new to CosmWasm smart contracts.
+- The minimal template assumes you already know how to write your own logic, includes the bare minimum and doesn't get in your way.
 
-[conditional.'minimal']
+Which version do you want to generate?"""
+default = "full"
+
+[conditional.'version == "minimal"']
 ignore = [
   "Developing.md",
   "Importing.md",
