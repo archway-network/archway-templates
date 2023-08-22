@@ -1,4 +1,4 @@
-{% unless minimal %}use schemars::JsonSchema;
+{% unless version == "minimal" %}use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 use cosmwasm_std::Addr;

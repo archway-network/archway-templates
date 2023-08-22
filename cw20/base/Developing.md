@@ -71,10 +71,14 @@ produce an extremely small build output in a consistent manner. The suggest way
 to run it is this:
 
 ```sh
-docker run --rm -v "$(pwd)":/code \
-  --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
-  --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  cosmwasm/rust-optimizer:0.11.4
+docker run --rm \
+  -e CARGO_TERM_COLOR=always \
+  -v "$(pwd)":/code
+  -v "$(basename "$(pwd)")_cache":/code/target \
+  -v "$(basename "$(pwd)")_registry_cache":/usr/local/cargo/registry \
+  -v "$(basename "$(pwd)")_cosmwasm_sccache":/root/.cache/sccache \
+  --name "$(basename "$(pwd)")" \
+  cosmwasm/rust-optimizer:0.14.0
 ```
 
 We must mount the contract code to `/code`. You can use a absolute path instead

@@ -1,6 +1,6 @@
 #![cfg(test)]
 
-use cosmwasm_std::{coins, to_binary, Addr, Empty, Uint128};
+use cosmwasm_std::{coins, to_binary, Addr, Empty, QuerierWrapper, Uint128};
 use cw20::{Cw20Coin, Cw20Contract, Cw20ExecuteMsg};
 use cw_multi_test::{App, Contract, ContractWrapper, Executor};
 
@@ -75,10 +75,11 @@ fn escrow_happy_path_cw20_tokens() {
     let cash = Cw20Contract(cash_addr.clone());
 
     // ensure our balances
-    let owner_balance = cash.balance::<_, _, Empty>(&router, owner.clone()).unwrap();
+    let querier = QuerierWrapper::<Empty>::new(&router);
+    let owner_balance = cash.balance::<_, Empty>(&querier, owner.clone()).unwrap();
     assert_eq!(owner_balance, Uint128::new(5000));
     let escrow_balance = cash
-        .balance::<_, _, Empty>(&router, escrow_addr.clone())
+        .balance::<_, Empty>(&querier, escrow_addr.clone())
         .unwrap();
     assert_eq!(escrow_balance, Uint128::zero());
 
@@ -118,10 +119,11 @@ fn escrow_happy_path_cw20_tokens() {
     assert_eq!(2, escrow_attr.len());
 
     // ensure balances updated
-    let owner_balance = cash.balance::<_, _, Empty>(&router, owner.clone()).unwrap();
+    let querier = QuerierWrapper::<Empty>::new(&router);
+    let owner_balance = cash.balance::<_, Empty>(&querier, owner.clone()).unwrap();
     assert_eq!(owner_balance, Uint128::new(3800));
     let escrow_balance = cash
-        .balance::<_, _, Empty>(&router, escrow_addr.clone())
+        .balance::<_, Empty>(&querier, escrow_addr.clone())
         .unwrap();
     assert_eq!(escrow_balance, Uint128::new(1200));
 
@@ -148,10 +150,11 @@ fn escrow_happy_path_cw20_tokens() {
         .unwrap();
 
     // ensure balances updated - release to ben
-    let owner_balance = cash.balance::<_, _, Empty>(&router, owner).unwrap();
+    let querier = QuerierWrapper::<Empty>::new(&router);
+    let owner_balance = cash.balance::<_, Empty>(&querier, owner).unwrap();
     assert_eq!(owner_balance, Uint128::new(3800));
-    let escrow_balance = cash.balance::<_, _, Empty>(&router, escrow_addr).unwrap();
+    let escrow_balance = cash.balance::<_, Empty>(&querier, escrow_addr).unwrap();
     assert_eq!(escrow_balance, Uint128::zero());
-    let ben_balance = cash.balance::<_, _, Empty>(&router, ben).unwrap();
+    let ben_balance = cash.balance::<_, Empty>(&querier, ben).unwrap();
     assert_eq!(ben_balance, Uint128::new(1200));
 }

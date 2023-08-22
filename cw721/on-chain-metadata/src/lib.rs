@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 use cosmwasm_std::Empty;
 use cw2::set_contract_version;
 use cw721::ContractInfoResponse;
-pub use cw721_base::{ContractError, InstantiateMsg, MintMsg, MinterResponse, QueryMsg};
+pub use cw721_base::{ContractError, InstantiateMsg, MinterResponse, QueryMsg};
 
 #[derive(Serialize, Deserialize, Clone, PartialEq, JsonSchema, Debug, Default)]
 pub struct Trait {
@@ -29,8 +29,8 @@ pub struct Metadata {
 
 pub type Extension = Option<Metadata>;
 
-pub type Cw721MetadataContract<'a> = cw721_base::Cw721Contract<'a, Extension, Empty>;
-pub type ExecuteMsg = cw721_base::ExecuteMsg<Extension>;
+pub type Cw721MetadataContract<'a> = cw721_base::Cw721Contract<'a, Extension, Empty, Empty, Empty>;
+pub type ExecuteMsg = cw721_base::ExecuteMsg<Extension, Empty>;
 
 const CONTRACT_NAME: &str = "crates.io:{{project-name}}";
 const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
@@ -61,10 +61,6 @@ pub mod entry {
         Cw721MetadataContract::default()
             .contract_info
             .save(deps.storage, &info)?;
-        let minter = deps.api.addr_validate(&msg.minter)?;
-        Cw721MetadataContract::default()
-            .minter
-            .save(deps.storage, &minter)?;
         Ok(Response::default())
     }
 
@@ -79,7 +75,7 @@ pub mod entry {
     }
 
     #[entry_point]
-    pub fn query(deps: Deps, env: Env, msg: QueryMsg) -> StdResult<Binary> {
+    pub fn query(deps: Deps, env: Env, msg: QueryMsg<Empty>) -> StdResult<Binary> {
         Cw721MetadataContract::default().query(deps, env, msg)
     }
 }
@@ -109,7 +105,7 @@ mod tests {
             .unwrap();
 
         let token_id = "Enterprise";
-        let mint_msg = MintMsg {
+        let mint_msg = ExecuteMsg::Mint {
             token_id: token_id.to_string(),
             owner: "john".to_string(),
             token_uri: Some("https://starships.example.com/Starship/Enterprise.json".into()),
@@ -119,13 +115,20 @@ mod tests {
                 ..Metadata::default()
             }),
         };
-        let exec_msg = ExecuteMsg::Mint(mint_msg.clone());
         contract
-            .execute(deps.as_mut(), mock_env(), info, exec_msg)
+            .execute(deps.as_mut(), mock_env(), info, mint_msg.clone())
             .unwrap();
 
         let res = contract.nft_info(deps.as_ref(), token_id.into()).unwrap();
-        assert_eq!(res.token_uri, mint_msg.token_uri);
-        assert_eq!(res.extension, mint_msg.extension);
+        if let ExecuteMsg::Mint {
+            token_id: _,
+            owner: _,
+            token_uri,
+            extension,
+        } = mint_msg
+        {
+            assert_eq!(res.token_uri, token_uri);
+            assert_eq!(res.extension, extension);
+        }
     }
 }
