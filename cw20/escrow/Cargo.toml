@@ -1,6 +1,6 @@
 [package]
 name = "{{project-name}}"
-version = "0.0.1"
+version = "0.1.0"
 authors = ["{{authors}}"]
 edition = "2021"
 description = "Implementation of an escrow that accepts CosmWasm-20 tokens as well as native tokens"
