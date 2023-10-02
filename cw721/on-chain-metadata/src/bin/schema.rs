@@ -1,6 +1,5 @@
 use cosmwasm_schema::write_api;
 
-use cosmwasm_std::Empty;
 use {{crate_name}}::{ExecuteMsg, InstantiateMsg, QueryMsg};
 
 fn main() {
