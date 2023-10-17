@@ -43,7 +43,7 @@ optimize = """docker run --rm \
 """
 
 [dependencies]
-archway-bindings = "0.1.0"
+archway-bindings = "0.2.1"
 cosmwasm-schema = "1.3.1"
 cosmwasm-std = "1.3.1"
 cosmwasm-storage = "1.3.1"
@@ -54,4 +54,4 @@ serde = { version = "1.0.183", default-features = false, features = ["derive"] }
 thiserror = "1.0.44"
 
 [dev-dependencies]
-cw-multi-test = "0.16.5"
+cw-multi-test = "0.17.0"
