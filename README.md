@@ -35,3 +35,7 @@ cargo generate --git archway-network/archway-templates.git --name PROJECT_NAME d
 
 You will now have a new folder called `PROJECT_NAME` (I hope you changed that to something else)
 containing a simple working contract and build system that you can customize.
+
+## Usage
+
+The default and increment templates include [cw-orchestrator](https://docs.rs/cw-orch/latest/cw_orch/) by default. This library allows you to unit-test, integration-test as well as interact with your contracts on-chain using a common intuitive syntax that leverages rust type-safety to assist you throughout your development process. You can find an example interface definition in the [increment/src/interface.rs](increment/src/interface.rs) file. You can also find more information in the [`cw-orch` documentation](https://orchestrator.abstract.money/).
